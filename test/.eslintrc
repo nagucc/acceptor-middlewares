@@ -11,6 +11,7 @@
       }
     ],
     "no-unused-expressions": "off",
-    "padded-blocks": "off"
+    "padded-blocks": "off",
+    "import/no-named-as-default": "off"
   }
 }

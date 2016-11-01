@@ -1,3 +1,6 @@
+/*
+eslint-disable import/extensions, import/no-unresolved
+ */
 import AcceptorManager from 'jkef-model';
 import { SERVER_FAILED } from 'nagu-validates';
 
