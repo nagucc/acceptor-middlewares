@@ -30,8 +30,10 @@ export default class StatMiddlewares {
   ) {
     return async (req, res, next) => {
       try {
-        // const data = await this.acceptorManager.getStatByProject();
-        const data = await cacheProxy(this.acceptorManager.getStatByProject.bind(acceptorManager), cacheOptions);
+        const data = await cacheProxy(
+          this.acceptorManager.getStatByProject.bind(this.acceptorManager),
+          cacheOptions
+        );
         success(data, req, res, next);
       } catch (msg) {
         fail({ ret: SERVER_FAILED, msg }, req, res, next);
@@ -58,7 +60,10 @@ export default class StatMiddlewares {
     return async (req, res, next) => {
       try {
         // const data = await this.acceptorManager.getStatByYear();
-        const data = await cacheProxy(this.acceptorManager.getStatByYear.bind(acceptorManager), cacheOptions);
+        const data = await cacheProxy(
+          this.acceptorManager.getStatByYear.bind(this.acceptorManager),
+          cacheOptions
+        );
         success(data, req, res, next);
       } catch (msg) {
         fail({ ret: SERVER_FAILED, msg }, req, res, next);
