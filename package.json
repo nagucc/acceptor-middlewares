@@ -1,6 +1,6 @@
 {
   "name": "acceptor-middlewares",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "description": "Express middlewares for acceptors",
   "main": "dist/index.js",
   "repository": {

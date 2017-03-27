@@ -4,7 +4,7 @@ import debug from 'debug';
 const error = debug('memory-cache-proxy:error');
 const info = debug('memory-cache-proxy:info');
 
-export default async (func, cacheOptions, args) => {
+export default async (func, cacheOptions, args = []) => {
   info(`${func.name} Cache Proxy`);
   // 检查cacheOptions是否正确
   if (!cacheOptions || !cacheOptions.key || !cacheOptions.expire) {
