@@ -1,8 +1,9 @@
 /*
-eslint-disable import/extensions, import/no-unresolved
+eslint-disable import/extensions, import/no-unresolved, no-param-reassign
  */
 import AcceptorManager from 'jkef-model';
 import { SERVER_FAILED } from 'nagu-validates';
+import cacheProxy from './memory-cache-proxy';
 
 export default class StatMiddlewares {
   constructor(mongoUrl, acceptorCollection = 'acceptors') {
@@ -13,13 +14,24 @@ export default class StatMiddlewares {
 
   getStatByProject(
     // 定义获取数据之后如何操作，默认为返回成功代码及数据
-    success = (data, req, res, next) => next(),
+    success = (data, req, res, next) => {
+      res.stateByProject = data;
+      next();
+    },
+
     // 定义获取数据失败时如何操作，默认为返回失败代码及描述
     fail = (e, req, res) => res.send(e),
+
+    // 缓存选项，默认缓存10个小时
+    cacheOptions = {
+      key: 'jkef:acceptors:stat:byproject',
+      expire: 10 * 3600 * 1000,
+    }
   ) {
     return async (req, res, next) => {
       try {
-        const data = await this.acceptorManager.getStatByProject();
+        // const data = await this.acceptorManager.getStatByProject();
+        const data = await cacheProxy(this.acceptorManager.getStatByProject.bind(acceptorManager), cacheOptions);
         success(data, req, res, next);
       } catch (msg) {
         fail({ ret: SERVER_FAILED, msg }, req, res, next);
@@ -29,13 +41,24 @@ export default class StatMiddlewares {
 
   getStatByYear(
     // 定义获取数据之后如何操作，默认为返回成功代码及数据
-    success = (data, req, res, next) => next(),
+    success = (data, req, res, next) => {
+      res.stateByYear = data;
+      next();
+    },
+
     // 定义获取数据失败时如何操作，默认为返回失败代码及描述
     fail = (e, req, res) => res.send(e),
+
+    // 缓存选项，默认缓存10个小时
+    cacheOptions = {
+      key: 'jkef:acceptors:stat:byyear',
+      expire: 10 * 3600 * 1000,
+    }
   ) {
     return async (req, res, next) => {
       try {
-        const data = await this.acceptorManager.getStatByYear();
+        // const data = await this.acceptorManager.getStatByYear();
+        const data = await cacheProxy(this.acceptorManager.getStatByYear.bind(acceptorManager), cacheOptions);
         success(data, req, res, next);
       } catch (msg) {
         fail({ ret: SERVER_FAILED, msg }, req, res, next);

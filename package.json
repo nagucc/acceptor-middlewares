@@ -1,6 +1,6 @@
 {
   "name": "acceptor-middlewares",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Express middlewares for acceptors",
   "main": "dist/index.js",
   "repository": {
@@ -33,7 +33,9 @@
   },
   "dependencies": {
     "babel-runtime": "^6.11.6",
+    "debug": "^2.6.3",
     "jkef-model": "^0.2.7",
+    "memory-cache": "^0.1.6",
     "mongodb": "^2.2.11",
     "nagu-validates": "^0.1.0"
   },
