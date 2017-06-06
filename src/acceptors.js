@@ -6,6 +6,7 @@ import { ObjectId } from 'mongodb';
 import { SUCCESS, INVALID_INTEGER,
   OBJECT_IS_NOT_FOUND, SERVER_FAILED, OBJECT_IS_UNDEFINED_OR_NULL } from 'nagu-validates';
 import AcceptorManager from 'jkef-model';
+import { error, info } from './config';
 
 export default class AcceptorMiddlewares {
   constructor(mongoUrl, acceptorCollection = 'acceptors') {
